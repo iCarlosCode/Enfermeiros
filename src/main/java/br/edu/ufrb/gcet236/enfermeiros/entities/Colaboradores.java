@@ -13,6 +13,10 @@ public class Colaboradores {
         this.colaboradores.add(colaborador);
     }
 
+    public void removerColaboradores(Pessoa colaborador) {
+        this.colaboradores.remove(colaborador);
+    }
+
     public ArrayList<Pessoa> buscarPorNome(String nome) {
         // Todo Baseado nos Exercícios 5.3 de 14 Mar no ClassRoom
         return null;

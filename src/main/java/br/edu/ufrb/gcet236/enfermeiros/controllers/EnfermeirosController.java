@@ -77,16 +77,15 @@ public class EnfermeirosController {
 
     @GetMapping(value = "/remover")
     public ResponseEntity<String> removerFevereiro(@RequestParam String nome, String cpf, String rg, String lotação) {
-        ArrayList<Pessoa> resultadosDaBusca = null;
-        Enfermeiro enfermeiro = buscarEnfermeiro(nome, cpf, rg, lotação).getBody().get(0);
+        var resultadoDaBusca = buscarEnfermeiro(nome, cpf, rg, lotação).getBody();
 
-        for (var resultado : resultadosDaBusca) {
-            if (resultado instanceof Enfermeiro)
-            {
-                enfermeiros.add((Enfermeiro) resultado);
-            }
+        if (resultadoDaBusca.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nenhum enfermeiro encontrado, revise suas informações.");
         }
 
+        Enfermeiro enfermeiro = resultadoDaBusca.get(0);
+        
+        colaboradores.removerColaboradores(enfermeiro);
         return ResponseEntity.ok(enfermeiros.toString());
     }
 }
