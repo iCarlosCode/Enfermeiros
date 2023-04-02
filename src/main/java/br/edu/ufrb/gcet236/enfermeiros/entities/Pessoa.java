@@ -1,24 +1,24 @@
 package br.edu.ufrb.gcet236.enfermeiros.entities;
 
 public class Pessoa {
-    private int rg;
-    private int cpf;
+    private String rg;
+    private String cpf;
     private String nome;
-    private int telefone;
+    private String telefone;
 
-    public int getRg() {
+    public String getRg() {
         return this.rg;
     }
 
-    public void setRg(int rg) {
+    public void setRg(String rg) {
         this.rg = rg;
     }
 
-    public int getCpf() {
+    public String getCpf() {
         return this.cpf;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
@@ -30,11 +30,11 @@ public class Pessoa {
         this.nome = nome;
     }
 
-    public int getTelefone() {
+    public String getTelefone() {
         return this.telefone;
     }
 
-    public void setTelefone(int telefone) {
+    public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 }

@@ -11,4 +11,11 @@ public class Enfermeiro extends Pessoa {
         this.lotação = lotação;
     }
 
+    @Override
+    public String toString() {
+
+        // Return Json of parameters lotação, rg, cpf, nome and telefone
+        return "{" + " lotação='" + this.getLotação() + "'" + ", rg='" + this.getRg() + "'" + ", cpf='" + this.getCpf() + "'"
+                + ", nome='" + this.getNome() + "'" + ", telefone='" + this.getTelefone() + "'" + "}";
+    }
 }

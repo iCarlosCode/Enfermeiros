@@ -1,0 +1,32 @@
+package br.edu.ufrb.gcet236.enfermeiros.entities;
+
+import java.util.ArrayList;
+
+public class Colaboradores {
+    private ArrayList<Pessoa> colaboradores = new ArrayList<Pessoa>();
+
+    public ArrayList<Pessoa> getColaboradores() {
+        return this.colaboradores;
+    }
+
+    public void cadastrarColaboradores(Pessoa colaborador) {
+        this.colaboradores.add(colaborador);
+    }
+
+    public ArrayList<Pessoa> buscarPorNome(String nome) {
+        // Todo Baseado nos Exercícios 5.3 de 14 Mar no ClassRoom
+        return null;
+    }
+    public ArrayList<Pessoa> buscarPorCPF(String cpf) {
+        // Todo Baseado nos Exercícios 5.3 de 14 Mar no ClassRoom
+        return null;
+    }
+    public ArrayList<Pessoa> buscarPorRG(String rg) {
+        // Todo Baseado nos Exercícios 5.3 de 14 Mar no ClassRoom
+        return null;
+    }
+    public ArrayList<Pessoa> buscarPorLotação(String lotação) {
+        // Todo Baseado nos Exercícios 5.3 de 14 Mar no ClassRoom
+        return null;
+    }
+}
