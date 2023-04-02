@@ -18,8 +18,14 @@ public class Colaboradores {
         return null;
     }
     public ArrayList<Pessoa> buscarPorCPF(String cpf) {
-        // Todo Baseado nos Exercícios 5.3 de 14 Mar no ClassRoom
-        return null;
+        ArrayList<Pessoa> resultados = new ArrayList<Pessoa>();
+        for (Pessoa colaborador : this.colaboradores) {
+            String cpfDoColaborador = colaborador.getCpf();
+            if (cpf.equalsIgnoreCase(cpfDoColaborador)) {
+                resultados.add(colaborador);
+            }
+        }
+        return resultados;
     }
     public ArrayList<Pessoa> buscarPorRG(String rg) {
         // Todo Baseado nos Exercícios 5.3 de 14 Mar no ClassRoom

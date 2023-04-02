@@ -26,6 +26,7 @@ public class EnfermeirosController {
     public ResponseEntity<String> get() {
         return ResponseEntity.ok("Hello Enfermeiros!");
     }
+    
     @GetMapping("/listar_enfermeiros")
     public ResponseEntity<String> listarEnfermeiros() {
         return ResponseEntity.ok(colaboradores.getColaboradores().toString());
@@ -39,8 +40,9 @@ public class EnfermeirosController {
     }
 
     @GetMapping(value = "/busca")
-    public ResponseEntity<String> buscaPorNome(@RequestParam String nome, String cpf, String rg, String lotação) {
+    public ResponseEntity<ArrayList<Enfermeiro>> buscarEnfermeiro(@RequestParam String nome, String cpf, String rg, String lotação) {
         ArrayList<Pessoa> resultadosDaBusca = null;
+        enfermeiros.clear();
         if (!nome.isEmpty()) {
             resultadosDaBusca = this.colaboradores.buscarPorNome(nome);
         } 
@@ -59,8 +61,24 @@ public class EnfermeirosController {
         
         if (resultadosDaBusca == null) 
         {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nenhum enfermeiro encontrado, revise suas informações.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(enfermeiros);
+                //"Nenhum enfermeiro encontrado, revise suas informações.");
         }
+
+        for (var resultado : resultadosDaBusca) {
+            if (resultado instanceof Enfermeiro)
+            {
+                enfermeiros.add((Enfermeiro) resultado);
+            }
+        }
+
+        return ResponseEntity.ok(enfermeiros);
+    }
+
+    @GetMapping(value = "/remover")
+    public ResponseEntity<String> removerFevereiro(@RequestParam String nome, String cpf, String rg, String lotação) {
+        ArrayList<Pessoa> resultadosDaBusca = null;
+        Enfermeiro enfermeiro = buscarEnfermeiro(nome, cpf, rg, lotação).getBody().get(0);
 
         for (var resultado : resultadosDaBusca) {
             if (resultado instanceof Enfermeiro)
