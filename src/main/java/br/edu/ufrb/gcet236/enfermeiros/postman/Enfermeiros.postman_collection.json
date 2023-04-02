@@ -1,0 +1,58 @@
+{
+	"info": {
+		"_postman_id": "c2458ba5-7060-406e-8cf3-48e3f3233f6c",
+		"name": "Enfermeiros",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26040052"
+	},
+	"item": [
+		{
+			"name": "Cadastrar Enfermeiro",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Enfermeiros",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Bucar Enfermeiro por Nome",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Bucar Enfermeiro por RG",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Bucar Enfermeiro por CPF",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Bucar Enfermeiro por Lotação",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
