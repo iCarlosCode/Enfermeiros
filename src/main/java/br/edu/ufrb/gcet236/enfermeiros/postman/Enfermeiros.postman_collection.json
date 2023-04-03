@@ -85,28 +85,6 @@
 			"response": []
 		},
 		{
-			"name": "Bucar Enfermeiro por Nome",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": ""
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Bucar Enfermeiro por RG",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": ""
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Buscar Enfermeiro por CPF",
 			"request": {
 				"method": "GET",
@@ -132,17 +110,6 @@
 							"value": "66645678910"
 						}
 					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Bucar Enfermeiro por Lotação",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": ""
 				}
 			},
 			"response": []

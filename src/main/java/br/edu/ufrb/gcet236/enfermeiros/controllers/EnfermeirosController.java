@@ -1,6 +1,7 @@
 package br.edu.ufrb.gcet236.enfermeiros.controllers;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -75,7 +76,7 @@ public class EnfermeirosController {
         return ResponseEntity.ok(enfermeiros);
     }
 
-    @GetMapping(value = "/remover")
+    @DeleteMapping(value = "/remover")
     public ResponseEntity<String> removerFevereiro(@RequestParam String nome, String cpf, String rg, String lotação) {
         var resultadoDaBusca = buscarEnfermeiro(nome, cpf, rg, lotação).getBody();
 
