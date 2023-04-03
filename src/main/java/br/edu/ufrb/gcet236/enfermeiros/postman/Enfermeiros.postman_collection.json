@@ -117,10 +117,10 @@
 		{
 			"name": "Remover por CPF",
 			"request": {
-				"method": "GET",
+				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/busca?nome=&cpf=66645678910",
+					"raw": "http://localhost:8080/api/remover?nome=&cpf=66645678910",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -128,7 +128,7 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"busca"
+						"remover"
 					],
 					"query": [
 						{
