@@ -1,16 +1,66 @@
 {
 	"info": {
-		"_postman_id": "c2458ba5-7060-406e-8cf3-48e3f3233f6c",
+		"_postman_id": "c7973af6-0425-4f43-b102-e9d18a6af09d",
 		"name": "Enfermeiros",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "26040052"
 	},
 	"item": [
 		{
-			"name": "Cadastrar Enfermeiro",
+			"name": "Cadastrar Enfermeiro Fulano",
 			"request": {
-				"method": "GET",
-				"header": []
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\":\"Fulano\",\r\n    \"telefone\":\"75999999999\",\r\n    \"rg\":\"1234567\",\r\n    \"cpf\":\"12345678910\",\r\n    \"lotação\":\"Apartamentos\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/cadastrar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"cadastrar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastrar Enfermeiro Ciclano",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\":\"Ciclano\",\r\n    \"telefone\":\"7588888888\",\r\n    \"rg\":\"6664567\",\r\n    \"cpf\":\"66645678910\",\r\n    \"lotação\":\"Enfermaria\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/cadastrar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"cadastrar"
+					]
+				}
 			},
 			"response": []
 		},
@@ -18,7 +68,19 @@
 			"name": "Listar Enfermeiros",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/listar_enfermeiros",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"listar_enfermeiros"
+					]
+				}
 			},
 			"response": []
 		},
@@ -26,7 +88,10 @@
 			"name": "Bucar Enfermeiro por Nome",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": ""
+				}
 			},
 			"response": []
 		},
@@ -34,15 +99,40 @@
 			"name": "Bucar Enfermeiro por RG",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": ""
+				}
 			},
 			"response": []
 		},
 		{
-			"name": "Bucar Enfermeiro por CPF",
+			"name": "Buscar Enfermeiro por CPF",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/busca?nome=&cpf=66645678910",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"busca"
+					],
+					"query": [
+						{
+							"key": "nome",
+							"value": ""
+						},
+						{
+							"key": "cpf",
+							"value": "66645678910"
+						}
+					]
+				}
 			},
 			"response": []
 		},
@@ -50,7 +140,40 @@
 			"name": "Bucar Enfermeiro por Lotação",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remover por CPF",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/busca?nome=&cpf=66645678910",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"busca"
+					],
+					"query": [
+						{
+							"key": "nome",
+							"value": ""
+						},
+						{
+							"key": "cpf",
+							"value": "66645678910"
+						}
+					]
+				}
 			},
 			"response": []
 		}
