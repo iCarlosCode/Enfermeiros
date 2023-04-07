@@ -29,8 +29,8 @@ public class EnfermeirosController {
     }
     
     @GetMapping("/listar_enfermeiros")
-    public ResponseEntity<String> listarEnfermeiros() {
-        return ResponseEntity.ok(colaboradores.getColaboradores().toString());
+    public ResponseEntity<ArrayList<Pessoa>> listarEnfermeiros() {
+        return ResponseEntity.ok(colaboradores.getColaboradores());
     }
 
     @PostMapping(value = "/cadastrar")

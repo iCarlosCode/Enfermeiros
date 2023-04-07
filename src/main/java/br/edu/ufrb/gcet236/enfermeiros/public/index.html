@@ -6,7 +6,7 @@
     <title>Enfermeiros</title>
   </head>
 
-  <body>
+  <body onload="start()">
 
     <section id="secaoPrincipal">
       <!--Aqui vai a tela de Principal do Aplicativo, com a appbar e com a lista de alunos e como o botão para adicionar mais-->
@@ -98,244 +98,12 @@
       <!-- Botão da chamada virtual estava aqui 14/01/2023-->
 
       <!--A Lista de Alunos fica dentro deste list-group-->
-      <div id="alunosLista1" class="list-group">
-
-
-        <a href="#" id="${doc.matricula}-${frequenciaIndex}"  
-            class="list-group-item list-group-item-action flex-column align-items-start">
-            <!--Dados aluno-->
-            <div style="float: left; margin-left: 10px;">
-                <!--NOME-->
-                <span class="material-symbols-outlined">person</span>
-                <label " class= "user name NOME" style="vertical-align: top; max-width: 350px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Ciclano da Silva</label>
-                <br>
-
-                <!--CPF-->
-                <span class="material-symbols-outlined">money</span>
-                <label class= "user matricula FREQ" style="vertical-align: top;">CPF:</label>
-                <label class= "user matricula FREQ" style="vertical-align: top;">112.233.445-56</label>
-                <br>
-                
-                <!--RG-->
-                <span class="material-symbols-outlined">pin</span>
-                <label class= "user matricula FREQ" style="vertical-align: top;">RG:</label>
-                <label class= "user matricula FREQ" style="vertical-align: top;">112 233 44 55</label>
-            </div>
-        
-            <div style="float: right; margin-right: 10px;">
-                <br>
-
-                <!--LOTAÇÃO-->
-                <span class="material-symbols-outlined">location_on</span>
-                <label class= "user matricula FREQ" style="vertical-align: top;">Apartamento</label>
-                <br>
-
-                <!--TELEFONE-->
-                <span class="material-symbols-outlined">call</span>
-                <label class= "user matricula FREQ" style="vertical-align: top;">+55 75 9 6666-6666</label>
-            </div>
-        </a>
-
-
+      <div id="enfermeirosLista" class="list-group">
+        <!--Aqui é onde vai a lista de alunos-->
       </div>
     </div>
 
       <!--Agora inicia as definições das Caixas de Diálogo de Diversos Tipos-->
-
-      <!--1. Aqui fica a caixa de diálogo do Relatório-->
-      <div
-        class="modal fade"
-        id="relatorioModalDialog"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalCenterTitle"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog modal-fullscreen" role="document">
-          <div class="modal-content">
-            <!--Cabeçalho-->
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Relatório</h5>
-
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <!--Corpo da Caixa de diálogo, aqui dentro ficará o Relatório-->
-            <div id="corpoCaixaDialogoRelatorio" class="modal-body">
-              <!--Drowpdown aqui estão as opções de meses que a pessoa pode escolher para gerar o relatório pro mês correto-->
-              <div class="dropdown">
-                <button
-                  class="btn btn-secondary dropdown-toggle"
-                  type="button"
-                  id="dropdownMesesRelatorioBtn"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Selecione um Mês
-                </button>
-                <ul
-                  id="dropdownMesesRelatorio"
-                  class="dropdown-menu"
-                  aria-labelledby="dropdownMesesRelatorioBtn"
-                >
-                  <li><a class="dropdown-item" href="#">Mês 1</a></li>
-                  <li><a class="dropdown-item" href="#">Mês 2</a></li>
-                  <li><a class="dropdown-item" href="#">Mês 3</a></li>
-                  <li><a class="dropdown-item" href="#">Mês 4</a></li>
-                </ul>
-              </div>
-              <!--É AQUI QUE FICA A TELA Dos relatórios-->
-              <ul id="listaAlunosRelatorio"></ul>
-            </div>
-
-            <!--Rodapé da Caixa de Diálogo-->
-            <div class="modal-footer">
-              <div
-                id="toastRelatorioCopiado"
-                class="toast align-items-center text-bg-primary border-0"
-                role="alert"
-                aria-live="assertive"
-                aria-atomic="true"
-              >
-                <div class="d-flex">
-                  <div class="toast-body">
-                    O relatório foi copiado com sucesso!
-                  </div>
-                  <button
-                    type="button"
-                    class="btn-close btn-close-white me-2 m-auto"
-                    data-bs-dismiss="toast"
-                    aria-label="Close"
-                  ></button>
-                </div>
-              </div>
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-dismiss="modal"
-                data-bs-dismiss="modal"
-              >
-                Voltar
-              </button>
-
-              <button
-                id="copiarRelatorioBtn"
-                type="button"
-                class="btn btn-primary"
-                onclick="copyButton()"
-              >
-                <span class="material-symbols-outlined">content_copy</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Caixa de Diálogo das Configurações -->
-      <div
-        class="modal fade"
-        id="configsModalDialog"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalCenterTitle"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <!--Cabeçalho Caixa de Diálogo-->
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">
-                Configurações
-              </h5>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-
-            <!--Corpo da Caixa de Diálogo-->
-            <div class="modal-body">
-              <!--É AQUI QUE FICA A TELA DAS CONFIGS-->
-              <section id="configsPadraoModalDialog">
-                <!--PADRÂO-->
-                <div id="userDetails"></div>
-                <button
-                  id="deslogarDoGoogleBtn"
-                  data-dismiss="modal"
-                  data-bs-dismiss="modal"
-                  class="btn btn-primary"
-                  style="margin: 5px"
-                >
-                  <div>Sair da conta do Google</div>
-                  <span class="material-symbols-outlined">logout</span>
-                </button>
-
-                <button
-                  id="btnDeletarConta"
-                  class="btn btn-danger"
-                  style="margin: 5px; border: none"
-                >
-                  <div>Quero Deletar minha conta</div>
-                  <span class="material-symbols-outlined">delete_forever</span>
-                </button>
-                <br />
-                <a
-                  href="https://github.com/Codeversidade/Monissores/blob/main/PRIVACY-POLICY.md"
-                  target="_blank"
-                  style="margin: 5px"
-                  >Política de Privacidade</a
-                >
-
-                <a
-                  href="https://github.com/Codeversidade/Monissores/blob/main/TERMS-OF-SERVICE.md"
-                  target="_blank"
-                  >Termos de Uso</a
-                >
-                <br />
-
-                <a
-                  href="https://github.com/Codeversidade/Monissores"
-                  target="_blank"
-                  >Sobre</a
-                >
-                <br />
-                <!--ul id="alunosLista"></ul-->
-              </section>
-              <!--Aqui fica a tela pra pessoa deletar a conta-->
-              <section id="configsDeletarContaModalDialog" hidden="true">
-                <p>
-                  Envie um e-mail para codeversidade+contato@gmail.com
-                  solicitando que sua conta seja deletada e excluiremos a sua
-                  conta em até dois dias úteis. Esse é um procedimento para
-                  evitar que sua conta seja deletada acidentalmente.
-                </p>
-              </section>
-            </div>
-
-            <!--Rodapé da Caixa de Diálogo-->
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-dismiss="modal"
-                data-bs-dismiss="modal"
-              >
-                Voltar
-              </button>
-
-              <button type="button" class="btn btn-primary" hidden="true">
-                Salvar
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <!-- Caixa de Diálogo de adicionar enfermeiro -->
       <div
@@ -429,6 +197,7 @@
                   type="button"
                   id="salvarAlunoNovoBtn"
                   class="btn btn-primary"
+                  onclick="requestCadastrarAluno()"
                 >
                   Salvar
                 </button>
@@ -658,6 +427,6 @@
     rel="stylesheet"
     href="https://www.gstatic.com/firebasejs/ui/6.0.2/firebase-ui-auth.css"
   />
-
   <script src="app.js" defer></script>
+  
 </html>
