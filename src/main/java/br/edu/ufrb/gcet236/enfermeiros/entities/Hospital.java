@@ -2,7 +2,7 @@ package br.edu.ufrb.gcet236.enfermeiros.entities;
 
 import java.util.ArrayList;
 
-public class Colaboradores {
+public class Hospital {
     private ArrayList<Pessoa> colaboradores = new ArrayList<Pessoa>();
 
     public ArrayList<Pessoa> getColaboradores() {
@@ -19,7 +19,13 @@ public class Colaboradores {
 
     public ArrayList<Pessoa> buscarPorNome(String nome) {
         // Todo Baseado nos Exercícios 5.3 de 14 Mar no ClassRoom
-        return null;
+        ArrayList<Pessoa> resultados = new ArrayList<Pessoa>();
+        for (Pessoa colaborador : this.colaboradores) {
+            if (colaborador.getNome().contains(nome)) {
+                resultados.add(colaborador);
+            }
+        }
+        return resultados;
     }
     public ArrayList<Pessoa> buscarPorCPF(String cpf) {
         ArrayList<Pessoa> resultados = new ArrayList<Pessoa>();
@@ -33,10 +39,25 @@ public class Colaboradores {
     }
     public ArrayList<Pessoa> buscarPorRG(String rg) {
         // Todo Baseado nos Exercícios 5.3 de 14 Mar no ClassRoom
-        return null;
+        ArrayList<Pessoa> resultados = new ArrayList<Pessoa>();
+        for (Pessoa colaborador : this.colaboradores) {
+            if (rg.equalsIgnoreCase(colaborador.getRg())) {
+                resultados.add(colaborador);
+            }
+        }
+        return resultados;
     }
     public ArrayList<Pessoa> buscarPorLotação(String lotação) {
-        // Todo Baseado nos Exercícios 5.3 de 14 Mar no ClassRoom
-        return null;
+        ArrayList<Pessoa> resultados = new ArrayList<Pessoa>();
+        for (Pessoa colaborador : this.colaboradores) {
+            if (colaborador instanceof Enfermeiro) {
+                Enfermeiro enfermeiro = (Enfermeiro) colaborador;
+                String lotacaoDoColaborador = enfermeiro.getLotação();
+                if (lotação.equalsIgnoreCase(lotacaoDoColaborador)){
+                    resultados.add(colaborador);
+                }
+            }
+        }
+        return resultados;
     }
 }
