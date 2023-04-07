@@ -1,7 +1,11 @@
 {
-    "nome":"Fulano",
-    "telefone":"75999999999",
-    "rg":"1234567",
-    "cpf":"12345678910",
-    "lotação":"Apartamentos"
+    "gets": [
+        {
+            "nome":"Fulano",
+            "telefone":"75999999999",
+            "rg":"1234567",
+            "cpf":"12345678910",
+            "lotação":"Apartamentos"
+        }
+      ]
 }
