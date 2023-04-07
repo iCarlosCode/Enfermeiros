@@ -67,18 +67,24 @@
           </nav>
 
         <!--Barra de pesquisa-->
-        <div id="barraDePesquisa">
-            <div>
-
-              <input
-                id="searchbar"
+        <form>
+          <div class="input-group" id="barraDePesquisa">
+            <input type="text" class="form-control"
+                id="barraDePesquisaEnfermeiro"
                 onkeyup="escolherFunc()"
                 type="text"
                 name="search"
-                placeholder="Procurar Enfermeiro"
-              />
-            </div>
+                placeholder="Procurar Enfermeiro">
+            
+            <select class="form-select" name="lotacoes" id="lotacaoAdicionarEnfermeiroInput">
+              <option value="nome">Nome</option>
+              <option value="cpf">CPF</option>
+              <option value="rg">RG</option>
+              <option value="telefone">Telefone</option>
+              <option value="lotacao">Lotação</option>
+          </select>
           </div>
+      </form>
           <!--Final da NavBar-->
           <!--Fim da lista de Abas de Meses-->
         </div>
@@ -194,7 +200,7 @@
                 </div>
 
                 <button
-                  type="button"
+                  type="submit"
                   id="salvarAlunoNovoBtn"
                   class="btn btn-primary"
                   onclick="requestCadastrarAluno()"

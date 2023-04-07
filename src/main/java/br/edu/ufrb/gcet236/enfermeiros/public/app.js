@@ -1,6 +1,6 @@
 function start() {
   requestPOST();
-  requestPOST();
+  //requestPOST();*/
   requestListarAlunos();
 }
 
