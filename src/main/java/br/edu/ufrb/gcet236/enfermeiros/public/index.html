@@ -29,7 +29,7 @@
               </button>
               <!--Aqui é o point-->
 
-              <a id="navBarTitulo" class="navbar-brand"> Enfermeiros </a>
+              <a id="navBarTitulo" class="navbar-brand"> SIGAE - Sistema de Gestão de Atividades de Enfermeiros </a>
 
               <div id="faixaBtn">
                 <!--Botão de editar aluno (Só aparece quando apenas 1 item do listgroup está selecionado)-->
@@ -70,13 +70,13 @@
         <form>
           <div class="input-group" id="barraDePesquisa">
             <input type="text" class="form-control"
-                id="barraDePesquisaEnfermeiro"
-                onkeyup="escolherFunc()"
+                id="barraDePesquisaEnfermeiroInput"
+                onkeyup="pesquisar()"
                 type="text"
                 name="search"
                 placeholder="Procurar Enfermeiro">
             
-            <select class="form-select" name="lotacoes" id="lotacaoAdicionarEnfermeiroInput">
+            <select class="form-select" name="tipos_pesquisa" id="barraDePesquisarEnfermeiroSelect">
               <option value="nome">Nome</option>
               <option value="cpf">CPF</option>
               <option value="rg">RG</option>
@@ -243,78 +243,78 @@
               <h5 class="modal-title" id="exampleModalLongTitle">
                 Editar Enfermeiro
               </h5>
-
-              <!--Nome-->
-              <div class="mb-3">
-                <label for="nomeEditarEnfermeiroInput" class="form-label"
-                  >Nome Completo</label
-                >
-                <input
-                  type="name"
-                  class="form-control"
-                  id="nomeEditarEnfermeiroInput"
-                />
-                </div>
-
-                <!--CPF-->
-                <div class="mb-3">
-                    <label for="cpfEditarEnfermeiroInput" class="form-label"
-                    >CPF</label
-                    >
-                    <input
-                    type="name"
-                    class="form-control"
-                    id="cpfEditarEnfermeiroInput"
-                    />
-                </div>
-
-                <!--LOTAÇÃO-->
-                <div class="mb-3">
-                    <label for="lotacaoEditarEnfermeiroInput" class="form-label"
-                    >Lotação</label
-                    > <br>
-                    <select class="form-select" name="lotacoes" id="lotacaoEditarEnfermeiroInput">
-                        <option value="emergencia">Emergência</option>
-                        <option value="enfermaria">Enfermaria</option>
-                        <option value="apartamentos">Apartamentos</option>
-                    </select>
-                </div>
-                <!--RG-->
-                <div class="mb-3">
-                    <label for="rgEditarEnfermeiroInput" class="form-label"
-                    >RG</label
-                    >
-                    <input
-                    type="name"
-                    class="form-control"
-                    id="rgEditarEnfermeiroInput"
-                    />
-                </div>
-
-                <!--Telefone-->
-                <div class="mb-3">
-                    <label for="telefoneEditarEnfermeiroInput" class="form-label"
-                    >Telefone</label
-                    >
-                    <input
-                    type="name"
-                    class="form-control"
-                    id="telefoneEditarEnfermeiroInput"
-                    />
-                </div>
-
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-
-            <!--Corpo da CD de Editar Aluno-->
+                <!--Corpo da CD de Editar Aluno-->
             <div class="modal-body">
               <!--É AQUI QUE FICA A TELA De Editar-->
               <form>
+                <!--Nome-->
+                <div class="mb-3">
+                  <label for="nomeEditarEnfermeiroInput" class="form-label"
+                    >Nome Completo</label
+                  >
+                  <input
+                    type="name"
+                    class="form-control"
+                    id="nomeEditarEnfermeiroInput"
+                  />
+                  </div>
+
+                  <!--CPF-->
+                  <div class="mb-3">
+                      <label for="cpfEditarEnfermeiroInput" class="form-label"
+                      >CPF</label
+                      >
+                      <input
+                      type="name"
+                      class="form-control"
+                      id="cpfEditarEnfermeiroInput"
+                      />
+                  </div>
+
+                  <!--LOTAÇÃO-->
+                  <div class="mb-3">
+                      <label for="lotacaoEditarEnfermeiroInput" class="form-label"
+                      >Lotação</label
+                      > <br>
+                      <select class="form-select" name="lotacoes" id="lotacaoEditarEnfermeiroInput">
+                          <option value="emergencia">Emergência</option>
+                          <option value="enfermaria">Enfermaria</option>
+                          <option value="apartamentos">Apartamentos</option>
+                      </select>
+                  </div>
+                  <!--RG-->
+                  <div class="mb-3">
+                      <label for="rgEditarEnfermeiroInput" class="form-label"
+                      >RG</label
+                      >
+                      <input
+                      type="name"
+                      class="form-control"
+                      id="rgEditarEnfermeiroInput"
+                      />
+                  </div>
+
+                  <!--Telefone-->
+                  <div class="mb-3">
+                      <label for="telefoneEditarEnfermeiroInput" class="form-label"
+                      >Telefone</label
+                      >
+                      <input
+                      type="name"
+                      class="form-control"
+                      id="telefoneEditarEnfermeiroInput"
+                      />
+                  </div>
+
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+
+              
                 
 
                 <button

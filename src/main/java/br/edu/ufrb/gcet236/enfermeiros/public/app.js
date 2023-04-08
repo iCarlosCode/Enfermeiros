@@ -1,7 +1,7 @@
 function start() {
   requestPOST();
   //requestPOST();*/
-  requestListarAlunos();
+  //requestListarAlunos();
 }
 
 var itensSelecionadosListGroup = [];
@@ -35,10 +35,31 @@ function configurarBtnDesselecionar() {
      ultimoItemClicado.removeClass('active');
      mudarEstadosDaInterfaceNaSelecao(0);
      itensSelecionadosListGroup = [];
-     escolherFunc();
+     //pesquisar();
    });
  }
 
+function pesquisar() {
+  switch (document.getElementById('barraDePesquisarEnfermeiroSelect').value) {
+    case 'Nome':
+      requestListarAlunos(`http://localhost:8080/api/buscar?nome=${document.getElementById('barraDePesquisarEnfermeiroInput').value}`);
+      break;
+    case 'CPF':
+      requestListarAlunos(`http://localhost:8080/api/buscar?nome=&cpf=${document.getElementById('barraDePesquisarEnfermeiroInput').value}`);
+      break;
+    case 'RG':
+      requestListarAlunos(`http://localhost:8080/api/buscar?nome=&rg=${document.getElementById('barraDePesquisarEnfermeiroInput').value}`);
+      break;
+    case 'Telefone':
+      requestListarAlunos(`http://localhost:8080/api/buscar?nome=&telefone=${document.getElementById('barraDePesquisarEnfermeiroInput').value}`);
+      break;
+    case 'Lotação':
+      requestListarAlunos(`http://localhost:8080/api/buscar?nome=&lotacao=${document.getElementById('barraDePesquisarEnfermeiroInput').value}`);
+      break;
+    default:
+      requestListarAlunos();
+  }
+}
  function configurarBtnSelecionarTudo() {
    $('#selecionarTudoBtn').on('click', function (e) {
      var id = itensSelecionadosListGroup[0].attr('id');
@@ -76,12 +97,12 @@ function mudarEstadosDaInterfaceNaSelecao(n) {
   if (n == 0) {
     //Caso barra de pesquisa esteja preechida
     ativacao = true;
-    if (document.getElementById('searchbar').value != '') {
+    if (document.getElementById('barraDePesquisarEnfermeiroInput').value != '') {
       escolherFunc();
       configurarBtnToShearch();
       buttonsExtra[2].hidden = !ativacao;
     } else {
-      navBarTitulo.innerHTML = 'Enfermeiros';
+      navBarTitulo.innerHTML = 'SIGAE - Sistema de Gestão de Atividades de Enfermeiros';
     }
   } else if (n == 1) {
     navBarTitulo.innerHTML = `${n} enfermeiro`;
@@ -100,10 +121,11 @@ function mudarEstadosDaInterfaceNaSelecao(n) {
   }
 }
 
-function requestListarAlunos() {
-  console.log('Função Get foi ativada');
+function requestListarAlunos(url = 'http://localhost:8080/api/listar_enfermeiros') {
+  console.log('Request de Listar Alunos');
+  enfermeirosLista.innerHTML = '';
 
-  const response = fetch('http://localhost:8080/api/listar_enfermeiros')
+  const response = fetch(url)
     .then(function (responseData) {
       return responseData.json();
     })

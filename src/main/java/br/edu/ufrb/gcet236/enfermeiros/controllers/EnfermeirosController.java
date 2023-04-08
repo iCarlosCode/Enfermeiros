@@ -20,7 +20,7 @@ import br.edu.ufrb.gcet236.enfermeiros.entities.Pessoa;
 @RestController
 @RequestMapping("api")
 public class EnfermeirosController {
-    Hospital colaboradores = new Hospital();
+    Hospital hospital = new Hospital();
     ArrayList<Enfermeiro> enfermeiros = new ArrayList<Enfermeiro>();
 
     @GetMapping("/hello-world")
@@ -30,14 +30,14 @@ public class EnfermeirosController {
     
     @GetMapping("/listar_enfermeiros")
     public ResponseEntity<ArrayList<Pessoa>> listarEnfermeiros() {
-        return ResponseEntity.ok(colaboradores.getColaboradores());
+        return ResponseEntity.ok(hospital.getColaboradores());
     }
 
     @PostMapping(value = "/cadastrar")
     public String cadastrarEnfermeiro(@RequestBody Enfermeiro entrada) {
-        colaboradores.cadastrarColaboradores(entrada);
+        hospital.cadastrarColaboradores(entrada);
         
-        return colaboradores.getColaboradores().toString();
+        return hospital.getColaboradores().toString();
     }
 
     @GetMapping(value = "/busca")
@@ -45,19 +45,19 @@ public class EnfermeirosController {
         ArrayList<Pessoa> resultadosDaBusca = null;
         enfermeiros.clear();
         if (!nome.isEmpty()) {
-            resultadosDaBusca = this.colaboradores.buscarPorNome(nome);
+            resultadosDaBusca = this.hospital.buscarPorNome(nome);
         } 
         else if (cpf != null) 
         {
-            resultadosDaBusca = this.colaboradores.buscarPorCPF(cpf);
+            resultadosDaBusca = this.hospital.buscarPorCPF(cpf);
         }
         else if (rg != null) 
         {
-            resultadosDaBusca = this.colaboradores.buscarPorRG(rg);
+            resultadosDaBusca = this.hospital.buscarPorRG(rg);
         }
         else if (lotação != null) 
         {
-            resultadosDaBusca = this.colaboradores.buscarPorLotação(lotação);
+            resultadosDaBusca = this.hospital.buscarPorLotação(lotação);
         }
         
         if (resultadosDaBusca == null) 
@@ -86,7 +86,7 @@ public class EnfermeirosController {
 
         Enfermeiro enfermeiro = resultadoDaBusca.get(0);
         
-        colaboradores.removerColaboradores(enfermeiro);
+        hospital.removerColaboradores(enfermeiro);
         return ResponseEntity.ok(enfermeiros.toString());
     }
 }
