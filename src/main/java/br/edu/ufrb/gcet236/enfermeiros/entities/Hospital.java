@@ -13,11 +13,12 @@ public class Hospital {
         this.colaboradores.add(colaborador);
     }
     
-    public void editarColaboradores(Pessoa enfermeiro){
+    public void editarColaboradores(Pessoa enfermeiro, String cpfAntigo){
+       
         for (int i = 0; i < colaboradores.size(); i++ ) {
             Pessoa colaborador = colaboradores.get(i);
             String cpfDoColaborador = colaborador.getCpf();
-            if (enfermeiro.getCpf().equalsIgnoreCase(cpfDoColaborador)) {
+            if (cpfAntigo.equalsIgnoreCase(cpfDoColaborador)) {
                 colaboradores.set(i, enfermeiro);
             }
         }

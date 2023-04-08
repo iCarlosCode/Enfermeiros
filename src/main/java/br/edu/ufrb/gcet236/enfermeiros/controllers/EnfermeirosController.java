@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 
 import br.edu.ufrb.gcet236.enfermeiros.entities.Hospital;
 import br.edu.ufrb.gcet236.enfermeiros.entities.Enfermeiro;
+import br.edu.ufrb.gcet236.enfermeiros.entities.EnfermeiroEntrada;
 import br.edu.ufrb.gcet236.enfermeiros.entities.Pessoa;
 
 @RestController
@@ -41,8 +42,9 @@ public class EnfermeirosController {
     }
 
     @PostMapping(value = "/editar")
-    public String editarEnfermeiro(@RequestBody Enfermeiro entrada) {
-        hospital.editarColaboradores(entrada);
+    public String editarEnfermeiro(@RequestParam String nome, String cpf, String rg, String telefone, String lotação, String cpfAntigo) {
+        Enfermeiro enfermeiro = new Enfermeiro(nome, cpf, rg, telefone, lotação);
+        hospital.editarColaboradores(enfermeiro, cpfAntigo);
         
         return hospital.getColaboradores().toString();
     }

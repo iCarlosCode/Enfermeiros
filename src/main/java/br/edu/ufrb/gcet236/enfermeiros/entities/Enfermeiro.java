@@ -3,6 +3,13 @@ package br.edu.ufrb.gcet236.enfermeiros.entities;
 public class Enfermeiro extends Pessoa {
     private String lotação;
 
+    public Enfermeiro(String nome, String cpf, String rg, String telefone, String lotação) {
+        this.setNome(nome);
+        this.setCpf(cpf);
+        this.setRg(rg);
+        this.setTelefone(telefone);
+        this.setLotação(lotação);
+    }
     public String getLotação() {
         return this.lotação;
     }
