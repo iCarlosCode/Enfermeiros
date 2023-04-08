@@ -12,6 +12,16 @@ public class Hospital {
     public void cadastrarColaboradores(Pessoa colaborador) {
         this.colaboradores.add(colaborador);
     }
+    
+    public void editarColaboradores(Pessoa enfermeiro){
+        for (int i = 0; i < colaboradores.size(); i++ ) {
+            Pessoa colaborador = colaboradores.get(i);
+            String cpfDoColaborador = colaborador.getCpf();
+            if (enfermeiro.getCpf().equalsIgnoreCase(cpfDoColaborador)) {
+                colaboradores.set(i, enfermeiro);
+            }
+        }
+    }
 
     public void removerColaboradores(Pessoa colaborador) {
         this.colaboradores.remove(colaborador);
@@ -27,6 +37,7 @@ public class Hospital {
         }
         return resultados;
     }
+    
     public ArrayList<Pessoa> buscarPorCPF(String cpf) {
         ArrayList<Pessoa> resultados = new ArrayList<Pessoa>();
         for (Pessoa colaborador : this.colaboradores) {
@@ -37,6 +48,7 @@ public class Hospital {
         }
         return resultados;
     }
+    
     public ArrayList<Pessoa> buscarPorRG(String rg) {
         // Todo Baseado nos Exercícios 5.3 de 14 Mar no ClassRoom
         ArrayList<Pessoa> resultados = new ArrayList<Pessoa>();
@@ -47,6 +59,7 @@ public class Hospital {
         }
         return resultados;
     }
+   
     public ArrayList<Pessoa> buscarPorLotação(String lotação) {
         ArrayList<Pessoa> resultados = new ArrayList<Pessoa>();
         for (Pessoa colaborador : this.colaboradores) {

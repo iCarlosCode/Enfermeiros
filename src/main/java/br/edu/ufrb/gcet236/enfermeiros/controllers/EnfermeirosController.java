@@ -40,6 +40,13 @@ public class EnfermeirosController {
         return hospital.getColaboradores().toString();
     }
 
+    @PostMapping(value = "/editar")
+    public String editarEnfermeiro(@RequestBody Enfermeiro entrada) {
+        hospital.editarColaboradores(entrada);
+        
+        return hospital.getColaboradores().toString();
+    }
+
     @GetMapping(value = "/busca")
     public ResponseEntity<ArrayList<Enfermeiro>> buscarEnfermeiro(@RequestParam String nome, String cpf, String rg, String lotação) {
         ArrayList<Pessoa> resultadosDaBusca = null;
