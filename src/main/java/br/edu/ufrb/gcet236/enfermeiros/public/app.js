@@ -1,7 +1,7 @@
 function start() {
   requestPOST();
   //requestPOST();*/
-  //requestListarAlunos();
+  requestListarAlunos();
 }
 
 var itensSelecionadosListGroup = [];
@@ -40,24 +40,27 @@ function configurarBtnDesselecionar() {
  }
 
 function pesquisar() {
+  var pesquisa = document.getElementById('barraDePesquisaEnfermeiroInput').value;
   switch (document.getElementById('barraDePesquisarEnfermeiroSelect').value) {
-    case 'Nome':
-      requestListarAlunos(`http://localhost:8080/api/buscar?nome=${document.getElementById('barraDePesquisarEnfermeiroInput').value}`);
+    case 'nome':
+      console.log("BUSCANDO POR NOME");
+      requestListarAlunos(`http://localhost:8080/api/buscar?nome=${pesquisa}`);
       break;
-    case 'CPF':
-      requestListarAlunos(`http://localhost:8080/api/buscar?nome=&cpf=${document.getElementById('barraDePesquisarEnfermeiroInput').value}`);
+    case 'cpf':
+      requestListarAlunos(`http://localhost:8080/api/buscar?nome=&cpf=${pesquisa}`);
       break;
-    case 'RG':
-      requestListarAlunos(`http://localhost:8080/api/buscar?nome=&rg=${document.getElementById('barraDePesquisarEnfermeiroInput').value}`);
+    case 'rg':
+      requestListarAlunos(`http://localhost:8080/api/buscar?nome=&rg=${pesquisa}`);
       break;
-    case 'Telefone':
-      requestListarAlunos(`http://localhost:8080/api/buscar?nome=&telefone=${document.getElementById('barraDePesquisarEnfermeiroInput').value}`);
+    case 'telefone':
+      requestListarAlunos(`http://localhost:8080/api/buscar?nome=&telefone=${pesquisa}`);
       break;
-    case 'Lotação':
-      requestListarAlunos(`http://localhost:8080/api/buscar?nome=&lotacao=${document.getElementById('barraDePesquisarEnfermeiroInput').value}`);
+    case 'lotacao':
+      requestListarAlunos(`http://localhost:8080/api/buscar?nome=&lotacao=${pesquisa}`);
       break;
-    default:
-      requestListarAlunos();
+  }
+  if (pesquisa == '') {
+    requestListarAlunos();
   }
 }
  function configurarBtnSelecionarTudo() {
@@ -97,13 +100,11 @@ function mudarEstadosDaInterfaceNaSelecao(n) {
   if (n == 0) {
     //Caso barra de pesquisa esteja preechida
     ativacao = true;
-    if (document.getElementById('barraDePesquisarEnfermeiroInput').value != '') {
-      escolherFunc();
-      configurarBtnToShearch();
-      buttonsExtra[2].hidden = !ativacao;
-    } else {
-      navBarTitulo.innerHTML = 'SIGAE - Sistema de Gestão de Atividades de Enfermeiros';
-    }
+    
+    //escolherFunc();
+    //configurarBtnToShearch();
+    buttonsExtra[2].hidden = !ativacao;
+    navBarTitulo.innerHTML = 'SIGAE - Sistema de Gestão de Atividades de Enfermeiros';
   } else if (n == 1) {
     navBarTitulo.innerHTML = `${n} enfermeiro`;
     ativacao = false;

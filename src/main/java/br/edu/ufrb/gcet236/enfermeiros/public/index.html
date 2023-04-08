@@ -227,7 +227,7 @@
         </div>
       </div>
 
-      <!-- Caixa de Diálogo de Editar Enfermeiro -->
+      <!-- Caixa de Diálogo de editar enfermeiro -->
       <div
         class="modal fade"
         id="editAlunoModalDialog"
@@ -243,88 +243,88 @@
               <h5 class="modal-title" id="exampleModalLongTitle">
                 Editar Enfermeiro
               </h5>
-                <!--Corpo da CD de Editar Aluno-->
+
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+
+            <!--Corpo da CD de Adicionar Enfermeiro-->
             <div class="modal-body">
-              <!--É AQUI QUE FICA A TELA De Editar-->
+              <!--É AQUI QUE FICA A TELA De adicionar-->
               <form>
                 <!--Nome-->
                 <div class="mb-3">
-                  <label for="nomeEditarEnfermeiroInput" class="form-label"
-                    >Nome Completo</label
-                  >
-                  <input
-                    type="name"
-                    class="form-control"
-                    id="nomeEditarEnfermeiroInput"
-                  />
-                  </div>
+                    <label for="nomeEditarEnfermeiroInput" class="form-label"
+                      >Nome Completo</label
+                    >
+                    <input
+                      type="name"
+                      class="form-control"
+                      id="nomeEditarEnfermeiroInput"
+                    />
+                </div>
 
-                  <!--CPF-->
-                  <div class="mb-3">
-                      <label for="cpfEditarEnfermeiroInput" class="form-label"
+                <!--CPF-->
+                <div class="mb-3">
+                    <label for="cpfEditarEnfermeiroInput" class="form-label"
                       >CPF</label
-                      >
-                      <input
+                    >
+                    <input
                       type="name"
                       class="form-control"
                       id="cpfEditarEnfermeiroInput"
-                      />
-                  </div>
+                    />
+                </div>
 
-                  <!--LOTAÇÃO-->
-                  <div class="mb-3">
-                      <label for="lotacaoEditarEnfermeiroInput" class="form-label"
+                <!--LOTAÇÃO-->
+                <div class="mb-3">
+                    <label for="lotacaoEditarEnfermeiroInput" class="form-label"
                       >Lotação</label
-                      > <br>
-                      <select class="form-select" name="lotacoes" id="lotacaoEditarEnfermeiroInput">
-                          <option value="emergencia">Emergência</option>
-                          <option value="enfermaria">Enfermaria</option>
-                          <option value="apartamentos">Apartamentos</option>
-                      </select>
-                  </div>
-                  <!--RG-->
-                  <div class="mb-3">
-                      <label for="rgEditarEnfermeiroInput" class="form-label"
+                    > <br>
+                    <select class="form-select" name="lotacoes" id="lotacaoEditarEnfermeiroInput">
+                        <option value="emergencia">Emergência</option>
+                        <option value="enfermaria">Enfermaria</option>
+                        <option value="apartamentos">Apartamentos</option>
+                    </select>
+                </div>
+                <!--RG-->
+                <div class="mb-3">
+                    <label for="rgEditarEnfermeiroInput" class="form-label"
                       >RG</label
-                      >
-                      <input
+                    >
+                    <input
                       type="name"
                       class="form-control"
                       id="rgEditarEnfermeiroInput"
-                      />
-                  </div>
+                    />
+                </div>
 
-                  <!--Telefone-->
-                  <div class="mb-3">
-                      <label for="telefoneEditarEnfermeiroInput" class="form-label"
+                <!--Telefone-->
+                <div class="mb-3">
+                    <label for="telefoneEditarEnfermeiroInput" class="form-label"
                       >Telefone</label
-                      >
-                      <input
+                    >
+                    <input
                       type="name"
                       class="form-control"
                       id="telefoneEditarEnfermeiroInput"
-                      />
-                  </div>
+                    />
+                </div>
 
                 <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-
-              
-                
-
-                <button
-                  type="button"
+                  type="submit"
                   id="editarAlunoBtn"
                   class="btn btn-primary"
+                  onclick="requestEditarAluno()"
                 >
                   Salvar
                 </button>
               </form>
+              <!-- Toast Para Informações Importantes-->
               <div
                 id="toastEditarAluno"
                 class="toast align-items-center text-bg-primary border-0"
@@ -333,7 +333,9 @@
                 aria-atomic="true"
               >
                 <div class="d-flex">
-                  <div id="toastEditarAlunoText" class="toast-body"></div>
+                  <div id="toastAdicionarAlunoText" class="toast-body">
+                    O relatório foi copiado com sucesso!
+                  </div>
                 </div>
               </div>
             </div>

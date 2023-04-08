@@ -15,7 +15,6 @@ import org.springframework.http.HttpStatus;
 
 import br.edu.ufrb.gcet236.enfermeiros.entities.Hospital;
 import br.edu.ufrb.gcet236.enfermeiros.entities.Enfermeiro;
-import br.edu.ufrb.gcet236.enfermeiros.entities.EnfermeiroEntrada;
 import br.edu.ufrb.gcet236.enfermeiros.entities.Pessoa;
 
 @RestController
@@ -49,7 +48,7 @@ public class EnfermeirosController {
         return hospital.getColaboradores().toString();
     }
 
-    @GetMapping(value = "/busca")
+    @GetMapping(value = "/buscar")
     public ResponseEntity<ArrayList<Enfermeiro>> buscarEnfermeiro(@RequestParam String nome, String cpf, String rg, String lotação) {
         ArrayList<Pessoa> resultadosDaBusca = null;
         enfermeiros.clear();
