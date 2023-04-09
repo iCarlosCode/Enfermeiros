@@ -32,12 +32,12 @@
               <a id="navBarTitulo" class="navbar-brand"> SIGAE - Sistema de Gestão de Atividades de Enfermeiros </a>
 
               <div id="faixaBtn">
-                <!--Botão de editar aluno (Só aparece quando apenas 1 item do listgroup está selecionado)-->
+                <!--Botão de editar enfermeiro (Só aparece quando apenas 1 item do listgroup está selecionado)-->
                 <button
                   id="editBtn"
                   class="buttonsExtra edit"
                   data-bs-toggle="modal"
-                  data-bs-target="#editAlunoModalDialog"
+                  data-bs-target="#editEnfermeiroModalDialog"
                   hidden="true"
                 >
                   <span class="material-symbols-outlined">edit</span>
@@ -230,7 +230,7 @@
       <!-- Caixa de Diálogo de editar enfermeiro -->
       <div
         class="modal fade"
-        id="editAlunoModalDialog"
+        id="editEnfermeiroModalDialog"
         tabindex="-1"
         role="dialog"
         aria-labelledby="exampleModalCenterTitle"
@@ -286,7 +286,7 @@
                       >Lotação</label
                     > <br>
                     <select class="form-select" name="lotacoes" id="lotacaoEditarEnfermeiroInput">
-                        <option value="emergencia">Emergência</option>
+                        <option value="emergência">Emergência</option>
                         <option value="enfermaria">Enfermaria</option>
                         <option value="apartamentos">Apartamentos</option>
                     </select>
@@ -343,12 +343,12 @@
         </div>
       </div>
 
-      <!-- Caixa de Diálogo de deletar aluno -->
+      <!-- Caixa de Diálogo de deletar Enfermeiro -->
       <div class="modal" tabindex="-1" id="removeAlunoModalDialog">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">Deletar alunos</h5>
+              <h5 class="modal-title">Deletar enfermeiros</h5>
               <button
                 type="button"
                 class="btn-close"
@@ -358,8 +358,7 @@
             </div>
             <div class="modal-body">
               <p>
-                Essa ação não pode ser desfeita e deletará o aluno de todos os
-                meses.
+                Essa ação não pode ser desfeita. Tem certeza que deseja deletar?
               </p>
             </div>
             <div class="modal-footer">
@@ -370,14 +369,17 @@
               >
                 Cancelar
               </button>
-              <button
-                type="button"
-                id="removeAlunoModalDialogBtn"
-                class="btn btn-primary deletarTudo"
-                data-bs-dismiss="modal"
-              >
-                Deletar
-              </button>
+              <form>
+                <button
+                  type="submit"
+                  id="removeAlunoModalDialogBtn"
+                  class="btn btn-primary deletarTudo"
+                  data-bs-dismiss="modal"
+                  onclick="requestDeletarAluno()"
+                >
+                  Deletar
+                </button>
+            </form>
             </div>
           </div>
         </div>

@@ -3,6 +3,7 @@ package br.edu.ufrb.gcet236.enfermeiros.controllers;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,7 +41,7 @@ public class EnfermeirosController {
         return hospital.getColaboradores().toString();
     }
 
-    @PostMapping(value = "/editar")
+    @PatchMapping(value = "/editar")
     public String editarEnfermeiro(@RequestParam String nome, String cpf, String rg, String telefone, String lotação, String cpfAntigo) {
         Enfermeiro enfermeiro = new Enfermeiro(nome, cpf, rg, telefone, lotação);
         hospital.editarColaboradores(enfermeiro, cpfAntigo);

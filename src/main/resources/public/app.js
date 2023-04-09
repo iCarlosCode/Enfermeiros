@@ -1,5 +1,5 @@
 function start() {
-  requestPOST();
+  //requestPOST();
   //requestPOST();*/
   requestListarAlunos();
 }
@@ -10,6 +10,7 @@ var ultimoItemClicado;
 configurarSelecaoInicialDosItensListGroup();
 configurarBtnDesselecionar();
 configurarBtnSelecionarTudo();
+configurarDialogEditar();
 
 function configurarSelecaoInicialDosItensListGroup() {
   $('.list-group').on('contextmenu', '.list-group-item', function (event) {
@@ -29,63 +30,108 @@ function configurarSelecaoInicialDosItensListGroup() {
 }
 
 function configurarBtnDesselecionar() {
-   $('#desselecionarTudoBtn').on('click', function (event) {
-     event.preventDefault();
-     ultimoItemClicado.siblings().removeClass('active');
-     ultimoItemClicado.removeClass('active');
-     mudarEstadosDaInterfaceNaSelecao(0);
-     itensSelecionadosListGroup = [];
-     //pesquisar();
-   });
- }
+  $('#desselecionarTudoBtn').on('click', function (event) {
+    event.preventDefault();
+    ultimoItemClicado.siblings().removeClass('active');
+    ultimoItemClicado.removeClass('active');
+    mudarEstadosDaInterfaceNaSelecao(0);
+    itensSelecionadosListGroup = [];
+    //pesquisar();
+  });
+}
 
 function pesquisar() {
-  var pesquisa = document.getElementById('barraDePesquisaEnfermeiroInput').value;
+  var pesquisa = document.getElementById(
+    'barraDePesquisaEnfermeiroInput'
+  ).value;
   switch (document.getElementById('barraDePesquisarEnfermeiroSelect').value) {
     case 'nome':
-      console.log("BUSCANDO POR NOME");
+      console.log('BUSCANDO POR NOME');
       requestListarAlunos(`http://localhost:8080/api/buscar?nome=${pesquisa}`);
       break;
     case 'cpf':
-      requestListarAlunos(`http://localhost:8080/api/buscar?nome=&cpf=${pesquisa}`);
+      requestListarAlunos(
+        `http://localhost:8080/api/buscar?nome=&cpf=${pesquisa}`
+      );
       break;
     case 'rg':
-      requestListarAlunos(`http://localhost:8080/api/buscar?nome=&rg=${pesquisa}`);
+      requestListarAlunos(
+        `http://localhost:8080/api/buscar?nome=&rg=${pesquisa}`
+      );
       break;
     case 'telefone':
-      requestListarAlunos(`http://localhost:8080/api/buscar?nome=&telefone=${pesquisa}`);
+      requestListarAlunos(
+        `http://localhost:8080/api/buscar?nome=&telefone=${pesquisa}`
+      );
       break;
     case 'lotacao':
-      requestListarAlunos(`http://localhost:8080/api/buscar?nome=&lotacao=${pesquisa}`);
+      requestListarAlunos(
+        `http://localhost:8080/api/buscar?nome=&lotacao=${pesquisa}`
+      );
       break;
   }
   if (pesquisa == '') {
     requestListarAlunos();
   }
 }
- function configurarBtnSelecionarTudo() {
-   $('#selecionarTudoBtn').on('click', function (e) {
-     var id = itensSelecionadosListGroup[0].attr('id');
-     console.log(id);
-     itensSelecionadosListGroup = [];
-     itensSelecionadosListGroup.push($(`#${id}`));
-     itensSelecionadosListGroup[0].siblings().addClass('active');
-     itensSelecionadosListGroup[0].siblings().each(function (index, element) {
+function configurarBtnSelecionarTudo() {
+  $('#selecionarTudoBtn').on('click', function (e) {
+    var id = itensSelecionadosListGroup[0].attr('id');
+    console.log(id);
+    itensSelecionadosListGroup = [];
+    itensSelecionadosListGroup.push($(`#${id}`));
+    itensSelecionadosListGroup[0].siblings().addClass('active');
+    itensSelecionadosListGroup[0].siblings().each(function (index, element) {
       itensSelecionadosListGroup.push($(`#${element.id}`));
-     });
-     mudarEstadosDaInterfaceNaSelecao(itensSelecionadosListGroup.length);
-   });
- }
+    });
+    mudarEstadosDaInterfaceNaSelecao(itensSelecionadosListGroup.length);
+  });
+}
+
+function configurarDialogEditar() {
+  editEnfermeiroModalDialog.addEventListener('show.bs.modal', event => {
+    console.log("TO COMECANDO A EDICAO");
+    document.getElementById('nomeEditarEnfermeiroInput').value = getNomeISLG(itensSelecionadosListGroup[0]);
+    document.getElementById('cpfEditarEnfermeiroInput').value = getCpfISLG(itensSelecionadosListGroup[0]);
+    document.getElementById('rgEditarEnfermeiroInput').value = getRgISLG(itensSelecionadosListGroup[0]);
+    document.getElementById('telefoneEditarEnfermeiroInput').value = getTelefoneISLG(itensSelecionadosListGroup[0]);
+    document.getElementById('lotacaoEditarEnfermeiroInput').value = getLotacaoISLG(itensSelecionadosListGroup[0]).toLowerCase();
+  });
+}
+
+/*
+ID | Label
+0  | Nome
+2  | Cpf
+4  | Rg
+5  | Lotacao
+6  | Telefone*/
+
+function getNomeISLG(i) {
+  return i.find('label')[0].innerHTML;
+}
 
 function getCpfISLG(i) {
-  return i.find('label')[1].innerHTML;
+  return i.find('label')[2].innerHTML;
+}
+
+function getRgISLG(i) {
+  return i.find('label')[4].innerHTML;
+}
+
+function getLotacaoISLG(i) {
+  return i.find('label')[5].innerHTML;
+}
+
+function getTelefoneISLG(i) {
+  return i.find('label')[6].innerHTML;
 }
 
 function removerItemSelecionado(value, index, arr) {
   // If the value at the current array index matches the specified value (2)
   if (getCpfISLG(value) === getCpfISLG(ultimoItemClicado)) {
     // Removes the value from the original array
-    
+
     arr.splice(index, 1);
     return true;
   }
@@ -100,20 +146,21 @@ function mudarEstadosDaInterfaceNaSelecao(n) {
   if (n == 0) {
     //Caso barra de pesquisa esteja preechida
     ativacao = true;
-    
+
     //escolherFunc();
     //configurarBtnToShearch();
     buttonsExtra[2].hidden = !ativacao;
-    navBarTitulo.innerHTML = 'SIGAE - Sistema de Gestão de Atividades de Enfermeiros';
+    navBarTitulo.innerHTML =
+      'SIGAE - Sistema de Gestão de Atividades de Enfermeiros';
   } else if (n == 1) {
     navBarTitulo.innerHTML = `${n} enfermeiro`;
     ativacao = false;
   }
-  
+
   for (b = 0; b < buttonsExtra.length; b++) {
     buttonsExtra[b].hidden = ativacao;
   }
-  
+
   addAluno.hidden = !ativacao;
 
   if (n > 1) {
@@ -122,7 +169,9 @@ function mudarEstadosDaInterfaceNaSelecao(n) {
   }
 }
 
-function requestListarAlunos(url = 'http://localhost:8080/api/listar_enfermeiros') {
+function requestListarAlunos(
+  url = 'http://localhost:8080/api/listar_enfermeiros'
+) {
   console.log('Request de Listar Alunos');
   enfermeirosLista.innerHTML = '';
 
@@ -218,6 +267,58 @@ function requestCadastrarAluno() {
     .catch(function (e) {
       console.log('Erro: ' + e);
     });
+}
+
+function requestEditarAluno() {
+  var nome = document.getElementById('nomeEditarEnfermeiroInput').value;
+  var cpf = document.getElementById('cpfEditarEnfermeiroInput').value;
+  var rg = document.getElementById('rgEditarEnfermeiroInput').value;
+  var select = document.getElementById('lotacaoEditarEnfermeiroInput');
+  var lotacao = select.options[select.selectedIndex].text;
+  var telefone = document.getElementById('telefoneEditarEnfermeiroInput').value;
+  var cpfAntigo = itensSelecionadosListGroup[0][0].id;
+
+  //http://localhost:8080/api/editar?nome=Beltrano&telefone=7588888888&rg=6664567&cpf=66645678912&lotação=Enfermaria&cpfAntigo=12345678910
+
+  const response = fetch(
+    `http://localhost:8080/api/editar?nome=${nome}&telefone=${telefone}&rg=${rg}&cpf=${cpf}&lotação=${lotacao}&cpfAntigo=${cpfAntigo}`,
+    { method: 'PATCH' }
+  )
+    .then(function (responseData) {
+      return responseData.json();
+    })
+    .then(function (jsonData) {
+      console.log(jsonData);
+      requestListarAlunos();
+      return jsonData;
+    })
+    .catch(function (e) {
+      console.log('Erro: ' + e);
+    });
+}
+
+function requestDeletarAluno() {
+  //http://localhost:8080/api/remover?nome=&cpf=66645678910
+
+  itensSelecionadosListGroup.forEach(element => {
+    var cpf = element[0].id;
+    const response = fetch(`http://localhost:8080/api/remover?nome=&cpf=${cpf}`, {
+      method: 'DELETE',
+    })
+      .then(function (responseData) {
+        return responseData.json();
+      })
+      .then(function (jsonData) {
+        console.log(jsonData);
+        requestListarAlunos();
+        return jsonData;
+      })
+      .catch(function (e) {
+        console.log('Erro: ' + e);
+      });
+  });
+  requestListarAlunos();
+  $('#desselecionarTudoBtn').click();
 }
 
 function requestPOST() {
