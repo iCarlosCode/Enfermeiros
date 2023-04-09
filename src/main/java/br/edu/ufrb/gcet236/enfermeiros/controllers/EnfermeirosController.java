@@ -1,7 +1,9 @@
 package br.edu.ufrb.gcet236.enfermeiros.controllers;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,14 +14,14 @@ import java.util.ArrayList;
 
 import org.springframework.http.HttpStatus;
 
-import br.edu.ufrb.gcet236.enfermeiros.entities.Colaboradores;
+import br.edu.ufrb.gcet236.enfermeiros.entities.Hospital;
 import br.edu.ufrb.gcet236.enfermeiros.entities.Enfermeiro;
 import br.edu.ufrb.gcet236.enfermeiros.entities.Pessoa;
 
 @RestController
 @RequestMapping("api")
 public class EnfermeirosController {
-    Colaboradores colaboradores = new Colaboradores();
+    Hospital hospital = new Hospital();
     ArrayList<Enfermeiro> enfermeiros = new ArrayList<Enfermeiro>();
 
     @GetMapping("/hello-world")
@@ -28,35 +30,43 @@ public class EnfermeirosController {
     }
     
     @GetMapping("/listar_enfermeiros")
-    public ResponseEntity<String> listarEnfermeiros() {
-        return ResponseEntity.ok(colaboradores.getColaboradores().toString());
+    public ResponseEntity<ArrayList<Pessoa>> listarEnfermeiros() {
+        return ResponseEntity.ok(hospital.getColaboradores());
     }
 
     @PostMapping(value = "/cadastrar")
     public String cadastrarEnfermeiro(@RequestBody Enfermeiro entrada) {
-        colaboradores.cadastrarColaboradores(entrada);
+        hospital.cadastrarColaboradores(entrada);
         
-        return colaboradores.getColaboradores().toString();
+        return hospital.getColaboradores().toString();
     }
 
-    @GetMapping(value = "/busca")
+    @PatchMapping(value = "/editar")
+    public String editarEnfermeiro(@RequestParam String nome, String cpf, String rg, String telefone, String lotação, String cpfAntigo) {
+        Enfermeiro enfermeiro = new Enfermeiro(nome, cpf, rg, telefone, lotação);
+        hospital.editarColaboradores(enfermeiro, cpfAntigo);
+        
+        return hospital.getColaboradores().toString();
+    }
+
+    @GetMapping(value = "/buscar")
     public ResponseEntity<ArrayList<Enfermeiro>> buscarEnfermeiro(@RequestParam String nome, String cpf, String rg, String lotação) {
         ArrayList<Pessoa> resultadosDaBusca = null;
         enfermeiros.clear();
         if (!nome.isEmpty()) {
-            resultadosDaBusca = this.colaboradores.buscarPorNome(nome);
+            resultadosDaBusca = this.hospital.buscarPorNome(nome);
         } 
         else if (cpf != null) 
         {
-            resultadosDaBusca = this.colaboradores.buscarPorCPF(cpf);
+            resultadosDaBusca = this.hospital.buscarPorCPF(cpf);
         }
         else if (rg != null) 
         {
-            resultadosDaBusca = this.colaboradores.buscarPorRG(rg);
+            resultadosDaBusca = this.hospital.buscarPorRG(rg);
         }
         else if (lotação != null) 
         {
-            resultadosDaBusca = this.colaboradores.buscarPorLotação(lotação);
+            resultadosDaBusca = this.hospital.buscarPorLotação(lotação);
         }
         
         if (resultadosDaBusca == null) 
@@ -75,18 +85,17 @@ public class EnfermeirosController {
         return ResponseEntity.ok(enfermeiros);
     }
 
-    @GetMapping(value = "/remover")
+    @DeleteMapping(value = "/remover")
     public ResponseEntity<String> removerFevereiro(@RequestParam String nome, String cpf, String rg, String lotação) {
-        ArrayList<Pessoa> resultadosDaBusca = null;
-        Enfermeiro enfermeiro = buscarEnfermeiro(nome, cpf, rg, lotação).getBody().get(0);
+        var resultadoDaBusca = buscarEnfermeiro(nome, cpf, rg, lotação).getBody();
 
-        for (var resultado : resultadosDaBusca) {
-            if (resultado instanceof Enfermeiro)
-            {
-                enfermeiros.add((Enfermeiro) resultado);
-            }
+        if (resultadoDaBusca.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nenhum enfermeiro encontrado, revise suas informações.");
         }
 
+        Enfermeiro enfermeiro = resultadoDaBusca.get(0);
+        
+        hospital.removerColaboradores(enfermeiro);
         return ResponseEntity.ok(enfermeiros.toString());
     }
 }
