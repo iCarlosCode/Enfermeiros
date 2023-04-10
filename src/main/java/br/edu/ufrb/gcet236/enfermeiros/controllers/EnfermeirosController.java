@@ -24,16 +24,19 @@ public class EnfermeirosController {
     Hospital hospital = new Hospital();
     ArrayList<Enfermeiro> enfermeiros = new ArrayList<Enfermeiro>();
 
+    // Endpoint para testar a API
     @GetMapping("/hello-world")
     public ResponseEntity<String> get() {
         return ResponseEntity.ok("Hello Enfermeiros!");
     }
     
+    // Endpoint para listar todos os enfermeiros cadastrados
     @GetMapping("/listar_enfermeiros")
     public ResponseEntity<ArrayList<Pessoa>> listarEnfermeiros() {
         return ResponseEntity.ok(hospital.getColaboradores());
     }
 
+    // Endpoint para cadastrar um novo enfermeiro
     @PostMapping(value = "/cadastrar")
     public String cadastrarEnfermeiro(@RequestBody Enfermeiro entrada) {
         hospital.cadastrarColaboradores(entrada);
@@ -41,6 +44,7 @@ public class EnfermeirosController {
         return hospital.getColaboradores().toString();
     }
 
+    // Endpoint para editar as informações de um enfermeiro
     @PatchMapping(value = "/editar")
     public String editarEnfermeiro(@RequestParam String nome, String cpf, String rg, String telefone, String lotação, String cpfAntigo) {
         Enfermeiro enfermeiro = new Enfermeiro(nome, cpf, rg, telefone, lotação);
@@ -49,6 +53,7 @@ public class EnfermeirosController {
         return hospital.getColaboradores().toString();
     }
 
+    // Endpoint para buscar enfermeiros com base em critérios de busca
     @GetMapping(value = "/buscar")
     public ResponseEntity<ArrayList<Enfermeiro>> buscarEnfermeiro(@RequestParam String nome, String cpf, String rg, String lotação) {
         ArrayList<Pessoa> resultadosDaBusca = null;
@@ -85,17 +90,5 @@ public class EnfermeirosController {
         return ResponseEntity.ok(enfermeiros);
     }
 
-    @DeleteMapping(value = "/remover")
-    public ResponseEntity<String> removerFevereiro(@RequestParam String nome, String cpf, String rg, String lotação) {
-        var resultadoDaBusca = buscarEnfermeiro(nome, cpf, rg, lotação).getBody();
-
-        if (resultadoDaBusca.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nenhum enfermeiro encontrado, revise suas informações.");
-        }
-
-        Enfermeiro enfermeiro = resultadoDaBusca.get(0);
-        
-        hospital.removerColaboradores(enfermeiro);
-        return ResponseEntity.ok(enfermeiros.toString());
-    }
-}
+    // Endpoint para remover um enfermeiro cadastrado
+   
