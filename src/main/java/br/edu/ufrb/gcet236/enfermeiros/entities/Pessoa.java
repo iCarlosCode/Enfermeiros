@@ -10,7 +10,7 @@ public class Pessoa {
     public String getRg() {
         return this.rg;
     }
-
+    //
     // Método para definir o RG
     public void setRg(String rg) {
         this.rg = rg;

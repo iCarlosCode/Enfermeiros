@@ -32,10 +32,12 @@ function configurarSelecaoInicialDosItensListGroup() {
 function configurarBtnDesselecionar() {
   $('#desselecionarTudoBtn').on('click', function (event) {
     event.preventDefault();
-    ultimoItemClicado.siblings().removeClass('active');
-    ultimoItemClicado.removeClass('active');
-    mudarEstadosDaInterfaceNaSelecao(0);
-    itensSelecionadosListGroup = [];
+    if (ultimoItemClicado != null){
+      ultimoItemClicado.siblings().removeClass('active');
+      ultimoItemClicado.removeClass('active');
+      mudarEstadosDaInterfaceNaSelecao(0);
+      itensSelecionadosListGroup = [];
+    } 
     //pesquisar();
   });
 }
