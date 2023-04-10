@@ -249,34 +249,37 @@ function requestCadastrarAluno() {
     'telefoneAdicionarEnfermeiroInput'
   ).value;
 
-  const headers = {
-    'Content-Type': 'application/json',
-  };
-
-  const init = {
-    method: 'POST',
-    headers: headers,
-    body: JSON.stringify({
-      nome: nome,
-      telefone: telefone,
-      rg: rg,
-      cpf: cpf,
-      lotação: lotacao,
-    }),
-  };
-
-  const response = fetch('http://localhost:8080/api/cadastrar', init)
-    .then(function (responseData) {
-      return responseData.json();
-    })
-    .then(function (jsonData) {
-      console.log(jsonData);
-      requestListarAlunos();
-      return jsonData;
-    })
-    .catch(function (e) {
-      console.log('Erro: ' + e);
-    });
+  if (cpf != "" && nome != "" && rg !="" && telefone != "" && lotacao != ""){
+    const headers = {
+      'Content-Type': 'application/json',
+    };
+  
+    const init = {
+      method: 'POST',
+      headers: headers,
+      body: JSON.stringify({
+        nome: nome,
+        telefone: telefone,
+        rg: rg,
+        cpf: cpf,
+        lotação: lotacao,
+      }),
+    };
+  
+    const response = fetch('http://localhost:8080/api/cadastrar', init)
+      .then(function (responseData) {
+        return responseData.json();
+      })
+      .then(function (jsonData) {
+        console.log(jsonData);
+        requestListarAlunos();
+        return jsonData;
+      })
+      .catch(function (e) {
+        console.log('Erro: ' + e);
+      });
+  }  
+ 
 }
 
 function requestEditarAluno() {
