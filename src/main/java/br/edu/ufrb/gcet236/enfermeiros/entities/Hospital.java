@@ -35,7 +35,8 @@ public class Hospital {
     public ArrayList<Pessoa> buscarPorNome(String nome) {
         ArrayList<Pessoa> resultados = new ArrayList<Pessoa>();
         for (Pessoa colaborador : this.colaboradores) {
-            if (nome.equalsIgnoreCase(colaborador.getNome())) {
+            System.out.println(colaborador.getNome() + nome.contains(colaborador.getNome()) + nome);
+            if (colaborador.getNome().contains(nome)) {
                 resultados.add(colaborador);
             }
         }
