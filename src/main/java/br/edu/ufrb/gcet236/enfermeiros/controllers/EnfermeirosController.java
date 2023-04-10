@@ -55,7 +55,7 @@ public class EnfermeirosController {
 
     // Endpoint para buscar enfermeiros com base em critérios de busca
     @GetMapping(value = "/buscar")
-    public ResponseEntity<ArrayList<Enfermeiro>> buscarEnfermeiro(@RequestParam String nome, String cpf, String rg, String lotação) {
+    public ResponseEntity<ArrayList<Enfermeiro>> buscarEnfermeiro(@RequestParam String nome, String cpf, String rg, String lotacao) {
         ArrayList<Pessoa> resultadosDaBusca = null;
         enfermeiros.clear();
         if (!nome.isEmpty()) {
@@ -69,9 +69,9 @@ public class EnfermeirosController {
         {
             resultadosDaBusca = this.colaboradores.buscarPorRG(rg);
         }
-        else if (lotação != null) 
+        else if (lotacao != null) 
         {
-            resultadosDaBusca = this.colaboradores.buscarPorLotação(lotação);
+            resultadosDaBusca = this.colaboradores.buscarPorLotação(lotacao);
         }
         
         if (resultadosDaBusca == null) 

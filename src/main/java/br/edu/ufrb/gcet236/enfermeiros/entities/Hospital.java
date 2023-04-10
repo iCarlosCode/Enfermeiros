@@ -72,7 +72,8 @@ public class Hospital {
             if (colaborador instanceof Enfermeiro) { // Verifica se o colaborador é um enfermeiro
                 Enfermeiro enfermeiro = (Enfermeiro) colaborador; // Realiza o cast do objeto para Enfermeiro
                 String lotacaoDoColaborador = enfermeiro.getLotação(); // Obtém a lotação do enfermeiro
-                if (lotação.equalsIgnoreCase(lotacaoDoColaborador)){ // Compara a lotação do enfermeiro com a lotação informada
+                System.out.println(lotacaoDoColaborador + " " + lotação);
+                if (lotacaoDoColaborador.equalsIgnoreCase(lotação)){ // Compara a lotação do enfermeiro com a lotação informada
                     resultados.add(colaborador); // Adiciona o enfermeiro na lista de resultados
                 }
             }
