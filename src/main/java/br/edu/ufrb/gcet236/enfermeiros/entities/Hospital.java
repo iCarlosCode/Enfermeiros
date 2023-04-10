@@ -60,8 +60,20 @@ public class Hospital {
         }
         return resultados;
     }
+
+    public ArrayList<Pessoa> buscarPorTelefone(String telefone) {
+        // Todo Baseado nos Exercícios 5.3 de 14 Mar no ClassRoom
+        ArrayList<Pessoa> resultados = new ArrayList<Pessoa>();
+        for (Pessoa colaborador : this.colaboradores) {
+            if (telefone.equalsIgnoreCase(colaborador.getTelefone())) {
+                resultados.add(colaborador);
+            }
+        }
+        return resultados;
+    }
    
     public ArrayList<Pessoa> buscarPorLotação(String lotação) {
+        System.out.println("lotação: " + lotação);
         ArrayList<Pessoa> resultados = new ArrayList<Pessoa>();
         for (Pessoa colaborador : this.colaboradores) {
             if (colaborador instanceof Enfermeiro) {

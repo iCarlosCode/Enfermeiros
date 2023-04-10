@@ -50,7 +50,7 @@ public class EnfermeirosController {
     }
 
     @GetMapping(value = "/buscar")
-    public ResponseEntity<ArrayList<Enfermeiro>> buscarEnfermeiro(@RequestParam String nome, String cpf, String rg, String lotação) {
+    public ResponseEntity<ArrayList<Enfermeiro>> buscarEnfermeiro(@RequestParam String nome, String cpf, String rg, String telefone, String lotacao) {
         ArrayList<Pessoa> resultadosDaBusca = null;
         enfermeiros.clear();
         if (!nome.isEmpty()) {
@@ -64,9 +64,13 @@ public class EnfermeirosController {
         {
             resultadosDaBusca = this.hospital.buscarPorRG(rg);
         }
-        else if (lotação != null) 
+        else if (telefone != null) 
         {
-            resultadosDaBusca = this.hospital.buscarPorLotação(lotação);
+            resultadosDaBusca = this.hospital.buscarPorTelefone(telefone);
+        }
+        else if (lotacao != null) 
+        {
+            resultadosDaBusca = this.hospital.buscarPorLotação(lotacao);
         }
         
         if (resultadosDaBusca == null) 
@@ -86,8 +90,8 @@ public class EnfermeirosController {
     }
 
     @DeleteMapping(value = "/remover")
-    public ResponseEntity<String> removerFevereiro(@RequestParam String nome, String cpf, String rg, String lotação) {
-        var resultadoDaBusca = buscarEnfermeiro(nome, cpf, rg, lotação).getBody();
+    public ResponseEntity<String> removerFevereiro(@RequestParam String nome, String cpf, String rg, String telefone, String lotação) {
+        var resultadoDaBusca = buscarEnfermeiro(nome, cpf, rg, telefone, lotação).getBody();
 
         if (resultadoDaBusca.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nenhum enfermeiro encontrado, revise suas informações.");

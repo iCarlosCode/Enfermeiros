@@ -44,33 +44,43 @@ function pesquisar() {
   var pesquisa = document.getElementById(
     'barraDePesquisaEnfermeiroInput'
   ).value;
-  switch (document.getElementById('barraDePesquisarEnfermeiroSelect').value) {
-    case 'nome':
-      console.log('BUSCANDO POR NOME');
-      requestListarAlunos(`http://localhost:8080/api/buscar?nome=${pesquisa}`);
-      break;
-    case 'cpf':
-      requestListarAlunos(
-        `http://localhost:8080/api/buscar?nome=&cpf=${pesquisa}`
-      );
-      break;
-    case 'rg':
-      requestListarAlunos(
-        `http://localhost:8080/api/buscar?nome=&rg=${pesquisa}`
-      );
-      break;
-    case 'telefone':
-      requestListarAlunos(
-        `http://localhost:8080/api/buscar?nome=&telefone=${pesquisa}`
-      );
-      break;
-    case 'lotacao':
-      requestListarAlunos(
-        `http://localhost:8080/api/buscar?nome=&lotacao=${pesquisa}`
-      );
-      break;
-  }
-  if (pesquisa == '') {
+  if (pesquisa !== '')
+  {
+    $('#desselecionarTudoBtn').click();
+    switch (document.getElementById('barraDePesquisarEnfermeiroSelect').value) {
+      case 'nome':
+        console.log('BUSCANDO POR NOME');
+        requestListarAlunos(`http://localhost:8080/api/buscar?nome=${pesquisa}`);
+        console.log(`http://localhost:8080/api/buscar?nome=${pesquisa}`);
+        break;
+      case 'cpf':
+        requestListarAlunos(
+          `http://localhost:8080/api/buscar?nome=&cpf=${pesquisa}`
+        );
+        console.log(`http://localhost:8080/api/buscar?nome=&cpf=${pesquisa}`);
+        break;
+      case 'rg':
+        requestListarAlunos(
+          `http://localhost:8080/api/buscar?nome=&rg=${pesquisa}`
+        );
+        console.log(`http://localhost:8080/api/buscar?nome=&rg=${pesquisa}`);
+        break;
+      case 'telefone':
+        requestListarAlunos(
+          `http://localhost:8080/api/buscar?nome=&telefone=${pesquisa}`
+        );
+        console.log(`http://localhost:8080/api/buscar?nome=&telefone=${pesquisa}`);
+        break;
+      case 'lotacao':
+        requestListarAlunos(
+          `http://localhost:8080/api/buscar?nome=&lotacao=${pesquisa}`
+        );
+        console.log(`http://localhost:8080/api/buscar?nome=&lotacao=${pesquisa}`);
+        break;
+    }
+  } 
+  else
+  {
     requestListarAlunos();
   }
 }
