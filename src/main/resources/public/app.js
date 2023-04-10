@@ -187,14 +187,19 @@ function requestListarAlunos(
 
   const response = fetch(url)
     .then(function (responseData) {
-      return responseData.json();
+      
+      return responseData.json()// .json();
     })
+    /*.then(function (jsonData) {
+      return JSON.parse(jsonData.replace('[{ ', '[{ "').replaceAll(', { ', ', { "').replaceAll("', ", '", "').replaceAll("='", '":"').replaceAll("'", '"'));
+    })*/
     .then(function (jsonData) {
+      console.log(jsonData);
       const enfermeirosLista = document.getElementById('enfermeirosLista');
-
+      console.log(jsonData);
       const items = jsonData.map(doc => {
         //querySnapshot.docs.map(doc => {
-
+        
         return `<a href="#" id=${doc.cpf}  
          class="list-group-item list-group-item-action flex-column align-items-start">
          <!--Dados aluno-->
@@ -233,9 +238,9 @@ function requestListarAlunos(
 
       enfermeirosLista.innerHTML = items.join('');
     })
-    .catch(function (e) {
+    /*.catch(function (e) {
       console.log('Erro: ' + e);
-    });
+    });*/
 }
 
 function requestCadastrarAluno() {

@@ -30,8 +30,8 @@ public class EnfermeirosController {
     
     //Essa função é um endpoint GET que retorna a lista de enfermeiros cadastrados no hospital como resposta.
     @GetMapping("/listar_enfermeiros")
-    public ResponseEntity<String> listarEnfermeiros() {
-        return ResponseEntity.ok(colaboradores.getColaboradores().toString());
+    public ResponseEntity<ArrayList<Pessoa>> listarEnfermeiros() {
+        return ResponseEntity.ok(colaboradores.getColaboradores());
     }
     
     ///Essa função é um endpoint POST que permite cadastrar um novo enfermeiro no hospital. 
