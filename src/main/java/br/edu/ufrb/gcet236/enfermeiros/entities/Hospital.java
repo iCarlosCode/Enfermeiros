@@ -15,7 +15,23 @@ public class Hospital {
         this.colaboradores.add(colaborador);
     }
     
-    //busca na lista de colaboradores por nome, ignorando o caso, e retorna uma lista de objetos do tipo Pessoa que possuem o nome informado.
+    // Método para editar um colaborador existente no hospital
+    public void editarColaboradores(Pessoa enfermeiro, String cpfAntigo){
+        for (int i = 0; i < colaboradores.size(); i++ ) {
+            Pessoa colaborador = colaboradores.get(i);
+            String cpfDoColaborador = colaborador.getCpf();
+            if (cpfAntigo.equalsIgnoreCase(cpfDoColaborador)) {
+                colaboradores.set(i, enfermeiro);
+            }
+        }
+    }
+
+    // Método para remover um colaborador do hospital
+    public void removerColaboradores(Pessoa colaborador) {
+        this.colaboradores.remove(colaborador);
+    }
+
+    // Método para buscar colaboradores por nome
     public ArrayList<Pessoa> buscarPorNome(String nome) {
         ArrayList<Pessoa> resultados = new ArrayList<Pessoa>();
         for (Pessoa colaborador : this.colaboradores) {
@@ -52,11 +68,11 @@ public class Hospital {
     public ArrayList<Pessoa> buscarPorLotação(String lotação) {
         ArrayList<Pessoa> resultados = new ArrayList<Pessoa>();
         for (Pessoa colaborador : this.colaboradores) {
-            if (colaborador instanceof Enfermeiro) {
-                Enfermeiro enfermeiro = (Enfermeiro) colaborador;
-                String lotacaoDoColaborador = enfermeiro.getLotação();
-                if (lotação.equalsIgnoreCase(lotacaoDoColaborador)){
-                    resultados.add(colaborador);
+            if (colaborador instanceof Enfermeiro) { // Verifica se o colaborador é um enfermeiro
+                Enfermeiro enfermeiro = (Enfermeiro) colaborador; // Realiza o cast do objeto para Enfermeiro
+                String lotacaoDoColaborador = enfermeiro.getLotação(); // Obtém a lotação do enfermeiro
+                if (lotação.equalsIgnoreCase(lotacaoDoColaborador)){ // Compara a lotação do enfermeiro com a lotação informada
+                    resultados.add(colaborador); // Adiciona o enfermeiro na lista de resultados
                 }
             }
         }

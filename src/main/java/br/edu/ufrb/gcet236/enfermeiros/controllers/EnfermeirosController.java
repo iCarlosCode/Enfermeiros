@@ -2,6 +2,7 @@ package br.edu.ufrb.gcet236.enfermeiros.controllers;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,12 +43,18 @@ public class EnfermeirosController {
         
         return colaboradores.getColaboradores().toString();
     }
-    
-    //Essa função é um endpoint GET que permite buscar enfermeiros com base em parâmetros de busca, como nome, CPF, RG ou lotação. 
-    //A busca é realizada chamando os respectivos métodos de busca do objeto colaboradores, que é uma instância da classe Hospital.
-    //Os resultados são retornados como uma lista de objetos Enfermeiro em formato JSON.
-    
-    @GetMapping(value = "/busca")
+
+    // Endpoint para editar as informações de um enfermeiro
+    @PatchMapping(value = "/editar")
+    public String editarEnfermeiro(@RequestParam String nome, String cpf, String rg, String telefone, String lotação, String cpfAntigo) {
+        Enfermeiro enfermeiro = new Enfermeiro(nome, cpf, rg, telefone, lotação);
+        colaboradores.editarColaboradores(enfermeiro, cpfAntigo);
+        
+        return colaboradores.getColaboradores().toString();
+    }
+
+    // Endpoint para buscar enfermeiros com base em critérios de busca
+    @GetMapping(value = "/buscar")
     public ResponseEntity<ArrayList<Enfermeiro>> buscarEnfermeiro(@RequestParam String nome, String cpf, String rg, String lotação) {
         ArrayList<Pessoa> resultadosDaBusca = null;
         enfermeiros.clear();
