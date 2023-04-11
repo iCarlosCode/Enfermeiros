@@ -32,12 +32,12 @@ function configurarSelecaoInicialDosItensListGroup() {
 function configurarBtnDesselecionar() {
   $('#desselecionarTudoBtn').on('click', function (event) {
     event.preventDefault();
-    if (ultimoItemClicado != null){
+    if (ultimoItemClicado != null) {
       ultimoItemClicado.siblings().removeClass('active');
       ultimoItemClicado.removeClass('active');
       mudarEstadosDaInterfaceNaSelecao(0);
       itensSelecionadosListGroup = [];
-    } 
+    }
     //pesquisar();
   });
 }
@@ -46,13 +46,14 @@ function pesquisar() {
   var pesquisa = document.getElementById(
     'barraDePesquisaEnfermeiroInput'
   ).value;
-  if (pesquisa !== '')
-  {
+  if (pesquisa !== '') {
     $('#desselecionarTudoBtn').click();
     switch (document.getElementById('barraDePesquisarEnfermeiroSelect').value) {
       case 'nome':
         console.log('BUSCANDO POR NOME');
-        requestListarAlunos(`http://localhost:8080/api/buscar?nome=${pesquisa}`);
+        requestListarAlunos(
+          `http://localhost:8080/api/buscar?nome=${pesquisa}`
+        );
         console.log(`http://localhost:8080/api/buscar?nome=${pesquisa}`);
         break;
       case 'cpf':
@@ -71,18 +72,20 @@ function pesquisar() {
         requestListarAlunos(
           `http://localhost:8080/api/buscar?nome=&telefone=${pesquisa}`
         );
-        console.log(`http://localhost:8080/api/buscar?nome=&telefone=${pesquisa}`);
+        console.log(
+          `http://localhost:8080/api/buscar?nome=&telefone=${pesquisa}`
+        );
         break;
       case 'lotacao':
         requestListarAlunos(
           `http://localhost:8080/api/buscar?nome=&lotacao=${pesquisa}`
         );
-        console.log(`http://localhost:8080/api/buscar?nome=&lotacao=${pesquisa}`);
+        console.log(
+          `http://localhost:8080/api/buscar?nome=&lotacao=${pesquisa}`
+        );
         break;
     }
-  } 
-  else
-  {
+  } else {
     requestListarAlunos();
   }
 }
@@ -102,12 +105,20 @@ function configurarBtnSelecionarTudo() {
 
 function configurarDialogEditar() {
   editEnfermeiroModalDialog.addEventListener('show.bs.modal', event => {
-    console.log("TO COMECANDO A EDICAO");
-    document.getElementById('nomeEditarEnfermeiroInput').value = getNomeISLG(itensSelecionadosListGroup[0]);
-    document.getElementById('cpfEditarEnfermeiroInput').value = getCpfISLG(itensSelecionadosListGroup[0]);
-    document.getElementById('rgEditarEnfermeiroInput').value = getRgISLG(itensSelecionadosListGroup[0]);
-    document.getElementById('telefoneEditarEnfermeiroInput').value = getTelefoneISLG(itensSelecionadosListGroup[0]);
-    document.getElementById('lotacaoEditarEnfermeiroInput').value = getLotacaoISLG(itensSelecionadosListGroup[0]).toLowerCase();
+    console.log('TO COMECANDO A EDICAO');
+    document.getElementById('nomeEditarEnfermeiroInput').value = getNomeISLG(
+      itensSelecionadosListGroup[0]
+    );
+    document.getElementById('cpfEditarEnfermeiroInput').value = getCpfISLG(
+      itensSelecionadosListGroup[0]
+    );
+    document.getElementById('rgEditarEnfermeiroInput').value = getRgISLG(
+      itensSelecionadosListGroup[0]
+    );
+    document.getElementById('telefoneEditarEnfermeiroInput').value =
+      getTelefoneISLG(itensSelecionadosListGroup[0]);
+    document.getElementById('lotacaoEditarEnfermeiroInput').value =
+      getLotacaoISLG(itensSelecionadosListGroup[0]).toLowerCase();
   });
 }
 
@@ -189,8 +200,7 @@ function requestListarAlunos(
 
   const response = fetch(url)
     .then(function (responseData) {
-      
-      return responseData.json()// .json();
+      return responseData.json(); // .json();
     })
     /*.then(function (jsonData) {
       return JSON.parse(jsonData.replace('[{ ', '[{ "').replaceAll(', { ', ', { "').replaceAll("', ", '", "').replaceAll("='", '":"').replaceAll("'", '"'));
@@ -201,7 +211,7 @@ function requestListarAlunos(
       console.log(jsonData);
       const items = jsonData.map(doc => {
         //querySnapshot.docs.map(doc => {
-        
+
         return `<a href="#" id=${doc.cpf}  
          class="list-group-item list-group-item-action flex-column align-items-start">
          <!--Dados aluno-->
@@ -239,8 +249,8 @@ function requestListarAlunos(
       });
 
       enfermeirosLista.innerHTML = items.join('');
-    })
-    /*.catch(function (e) {
+    });
+  /*.catch(function (e) {
       console.log('Erro: ' + e);
     });*/
 }
@@ -249,18 +259,17 @@ function requestCadastrarAluno() {
   var nome = document.getElementById('nomeAdicionarEnfermeiroInput').value;
   var cpf = document.getElementById('cpfAdicionarEnfermeiroInput').value;
   var rg = document.getElementById('rgAdicionarEnfermeiroInput').value;
-  var lotacao = document.getElementById(
-    'lotacaoAdicionarEnfermeiroInput'
-  ).value;
+  var select = document.getElementById('lotacaoAdicionarEnfermeiroInput');
+  var lotacao = select.options[select.selectedIndex].text;
   var telefone = document.getElementById(
     'telefoneAdicionarEnfermeiroInput'
   ).value;
 
-  if (cpf != "" && nome != "" && rg !="" && telefone != "" && lotacao != ""){
+  if (cpf != '' && nome != '' && rg != '' && telefone != '' && lotacao != '') {
     const headers = {
       'Content-Type': 'application/json',
     };
-  
+
     const init = {
       method: 'POST',
       headers: headers,
@@ -272,7 +281,7 @@ function requestCadastrarAluno() {
         lotação: lotacao,
       }),
     };
-  
+
     const response = fetch('http://localhost:8080/api/cadastrar', init)
       .then(function (responseData) {
         return responseData.json();
@@ -285,8 +294,7 @@ function requestCadastrarAluno() {
       .catch(function (e) {
         console.log('Erro: ' + e);
       });
-  }  
- 
+  }
 }
 
 function requestEditarAluno() {
@@ -322,9 +330,12 @@ function requestDeletarAluno() {
 
   itensSelecionadosListGroup.forEach(element => {
     var cpf = element[0].id;
-    const response = fetch(`http://localhost:8080/api/remover?nome=&cpf=${cpf}`, {
-      method: 'DELETE',
-    })
+    const response = fetch(
+      `http://localhost:8080/api/remover?nome=&cpf=${cpf}`,
+      {
+        method: 'DELETE',
+      }
+    )
       .then(function (responseData) {
         return responseData.json();
       })

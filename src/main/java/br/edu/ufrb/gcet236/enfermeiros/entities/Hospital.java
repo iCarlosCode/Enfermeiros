@@ -64,6 +64,16 @@ public class Hospital {
         }
         return resultados;
     }
+
+    public ArrayList<Pessoa> buscarPorTelefone(String telefone) {
+        ArrayList<Pessoa> resultados = new ArrayList<Pessoa>();
+        for (Pessoa colaborador : this.colaboradores) {
+            if (telefone.equalsIgnoreCase(colaborador.getTelefone())) {
+                resultados.add(colaborador);
+            }
+        }
+        return resultados;
+    }
     
     //busca na lista de colaboradores por lotação, ignorando o caso, e retorna uma lista de objetos do tipo Pessoa que possuem a lotação informada. 
     public ArrayList<Pessoa> buscarPorLotação(String lotação) {
